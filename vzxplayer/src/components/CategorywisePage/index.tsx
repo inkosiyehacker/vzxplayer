@@ -15,6 +15,7 @@ function capitalizeFirstLetter(string: string) {
 }
 
 const dummyList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
 const CategorywisePage = ({ categoryDiv, categoryPage = null }: any) => {
   const [categoryType, setCategoryType] = useState(categoryDiv);
   const [category, setCategory] = useState("latest"); // latest, trending, topRated
@@ -28,17 +29,19 @@ const CategorywisePage = ({ categoryDiv, categoryPage = null }: any) => {
   const [sortBy, setSortBy] = useState();
   const [trigger, setTrigger] = useState(false);
   const [loading, setLoading] = useState(true);
+
   const CapitalCategoryType = capitalizeFirstLetter(categoryType);
   console.log(capitalizeFirstLetter(categoryType));
+
   useEffect(() => {
     if (loading) {
       NProgress.start();
     } else NProgress.done(false);
   }, [loading]);
+
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
-      // setData([0, 0, 0, 0, 0, 0, 0, 0, 0]); // for blink loading effect
       try {
         let data;
         if (category === "filter") {
@@ -59,11 +62,11 @@ const CategorywisePage = ({ categoryDiv, categoryPage = null }: any) => {
                 ? categoryType === "tv"
                   ? "first_air_date.desc"
                   : "primary_release_date.desc"
-                : undefined || category === "trending"
-                  ? "popularity.desc"
-                  : undefined || category === "topRated"
-                    ? "vote_count.desc"
-                    : undefined,
+              : category === "trending"
+                ? "popularity.desc"
+              : category === "topRated"
+                ? "vote_count.desc"
+              : undefined,
             genreKeywords: "210024,",
             page: currentPage,
           });
@@ -76,11 +79,11 @@ const CategorywisePage = ({ categoryDiv, categoryPage = null }: any) => {
                 ? categoryType === "tv"
                   ? "first_air_date.desc"
                   : "primary_release_date.desc"
-                : undefined || category === "trending"
-                  ? "popularity.desc"
-                  : undefined || category === "topRated"
-                    ? "vote_count.desc"
-                    : undefined,
+              : category === "trending"
+                ? "popularity.desc"
+              : category === "topRated"
+                ? "vote_count.desc"
+              : undefined,
             genreKeywords: ",",
             country: "KR",
             page: currentPage,
@@ -91,7 +94,7 @@ const CategorywisePage = ({ categoryDiv, categoryPage = null }: any) => {
             page: currentPage,
           });
         }
-        // console.log();
+
         if (data.page > data.total_pages) {
           setCurrentPage(data.total_pages);
         }
@@ -99,6 +102,7 @@ const CategorywisePage = ({ categoryDiv, categoryPage = null }: any) => {
           setCurrentPage(data.total_pages);
           return;
         }
+
         setData(data.results);
         setTotalpages(data.total_pages > 500 ? 500 : data.total_pages);
         setLoading(false);
@@ -110,15 +114,12 @@ const CategorywisePage = ({ categoryDiv, categoryPage = null }: any) => {
     fetchData();
   }, [categoryType, category, currentPage, trigger]);
 
-  // useEffect(()=>{
-  //   setCurrentPage(1);
-  // },[category])
-
   const handleFilterClick = () => {
     setCurrentPage(1);
     setCategory("filter");
     setShowFilter(!showFilter);
   };
+
   return (
     <div className={styles.MoviePage}>
       <h1>
@@ -126,6 +127,7 @@ const CategorywisePage = ({ categoryDiv, categoryPage = null }: any) => {
           (categoryPage === "anime" && "Anime") ||
           (categoryPage === "kdrama" && "K-Drama")}
       </h1>
+
       <div className={styles.category}>
         <p
           className={`${category === "latest" ? styles.active : styles.inactive}`}
@@ -145,6 +147,7 @@ const CategorywisePage = ({ categoryDiv, categoryPage = null }: any) => {
         >
           Top-Rated
         </p>
+
         {categoryPage === null ? (
           <p
             className={`${category === "filter" ? styles.active : styles.inactive} ${styles.filter}`}
@@ -172,7 +175,7 @@ const CategorywisePage = ({ categoryDiv, categoryPage = null }: any) => {
           </select>
         )}
       </div>
-      {/* <Filter/> */}
+
       {showFilter && (
         <Filter
           categoryType={categoryType}
@@ -190,15 +193,15 @@ const CategorywisePage = ({ categoryDiv, categoryPage = null }: any) => {
           trigger={trigger}
         />
       )}
+
       <div className={styles.movieList}>
         {data.map((ele: any) => {
           return <MovieCardSmall data={ele} media_type={categoryType} />;
         })}
         {data?.length === 0 &&
-          dummyList.map((ele) => <Skeleton className={styles.loading} />)}
-        {/* {data?.total_results === 0 &&
-          <h1>No Data Found</h1>} */}
+          dummyList.map((ele) => <Skeleton key={ele} className={styles.loading} />)}
       </div>
+
       <ReactPaginate
         containerClassName={styles.pagination}
         pageClassName={styles.page_item}
@@ -217,7 +220,6 @@ const CategorywisePage = ({ categoryDiv, categoryPage = null }: any) => {
         previousLabel={<AiFillLeftCircle className={styles.paginationIcons} />}
         nextLabel={<AiFillRightCircle className={styles.paginationIcons} />}
       />
-      ;
     </div>
   );
 };
