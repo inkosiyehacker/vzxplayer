@@ -294,7 +294,7 @@ const Watch = () => {
       {source === "AGG" && id && embedMode === true ? (
         <iframe
           scrolling="no"
-          src={type === "movie" ? `${STREAM_URL_AGG}/embed/?id=${type}/${id}` : `${STREAM_URL_VID}/embed/${type}/?id=${id}/${season}/${episode}`}
+          src={type === "movie" ? `${STREAM_URL_AGG}/embed/${type}/?id=${id}` : `${STREAM_URL_VID}/embed/${type}/?id=${id}/${season}/${episode}`}
           className={styles.iframe}
           allowFullScreen
           allow="accelerometer; autoplay; encrypted-media; gyroscope;"
