@@ -292,7 +292,14 @@ const Watch = () => {
 
   
       {source === "AGG" && id && embedMode === true ? (
-        <iframe src={`${STREAM_URL_AGG}/embed/movie/${id}`} className={styles.iframe}></iframe>
+        <iframe
+          scrolling="no"
+          src={type === "movie" ? `${STREAM_URL_VID}/embed/${type}/${id}` : `${STREAM_URL_VID}/embed/${type}/${id}/${season}/${episode}`}
+          className={styles.iframe}
+          allowFullScreen
+          allow="accelerometer; autoplay; encrypted-media; gyroscope;"
+          referrerPolicy="origin"
+        ></iframe>
       ) : null}
   {/* ❌ COMMENTED IFRAME BLOCKS (kept in code, but disabled)
 
