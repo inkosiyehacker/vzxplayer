@@ -150,7 +150,7 @@ const Watch = () => {
   const STREAM_URL_ANY = process.env.NEXT_PUBLIC_STREAM_URL_ANY;
 
   // ❌ COMMENTED SERVERS
-  // const STREAM_URL_AGG = process.env.NEXT_PUBLIC_STREAM_URL_AGG;
+  const STREAM_URL_AGG = process.env.NEXT_PUBLIC_STREAM_URL_AGG;
   // const STREAM_URL_PRO = process.env.NEXT_PUBLIC_STREAM_URL_PRO;
   // const STREAM_URL_MULTI = process.env.NEXT_PUBLIC_STREAM_URL_MULTI;
   // const STREAM_URL_SUP = process.env.NEXT_PUBLIC_STREAM_URL_SUP;
@@ -200,10 +200,10 @@ const Watch = () => {
               localStorage.setItem("VelzorixStreamLatestAgg", e.target.value);
             }}
           >
-            {/* <option value="AGG">Aggregator : 1 (Multi-Server)</option> */}
             <option value="EMB">Server : 1 (ads)</option>
             <option value="VID">Server : 2 (ads)</option>
             <option value="ANY">Server : 3 (Multi-Server)</option>
+            <option value="AGG">Server:  4(Hindi dubbed available)</option>
             {/* <option value="PRO">Aggregator : 3 (Best-Server)</option> */}
             {/* <option value="MULTI">Aggregator : 5 (Fast-Server)</option> */}
             {/* <option value="SUP">Aggregator : 6 (Multi/Most-Server)</option> */}
@@ -290,11 +290,11 @@ const Watch = () => {
         ></iframe>
       ) : null}
 
-      {/* ❌ COMMENTED IFRAME BLOCKS (kept in code, but disabled)
-
+  
       {source === "AGG" && id && embedMode === true ? (
-        <iframe src={`${STREAM_URL_AGG}/embed/${id}`} className={styles.iframe}></iframe>
+        <iframe src={`${STREAM_URL_AGG}/embed/movie/${id}`} className={styles.iframe}></iframe>
       ) : null}
+  {/* ❌ COMMENTED IFRAME BLOCKS (kept in code, but disabled)
 
       {source === "PRO" && id && embedMode === true ? (
         <iframe src={`${STREAM_URL_PRO}/embed/${type}/${id}`} className={styles.iframe}></iframe>
