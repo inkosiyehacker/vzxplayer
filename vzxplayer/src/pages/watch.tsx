@@ -148,7 +148,7 @@ const Watch = () => {
   const STREAM_URL_VID = process.env.NEXT_PUBLIC_STREAM_URL_VID;
   const STREAM_URL_EMB = process.env.NEXT_PUBLIC_STREAM_URL_EMB;
   const STREAM_URL_ANY = process.env.NEXT_PUBLIC_STREAM_URL_ANY;
-
+  const STREAM_URL_NEXT = process.env.NEXT_PUBLIC_STREAM_URL_NEXT;
   // ❌ COMMENTED SERVERS
   const STREAM_URL_AGG = process.env.NEXT_PUBLIC_STREAM_URL_AGG;
   // const STREAM_URL_PRO = process.env.NEXT_PUBLIC_STREAM_URL_PRO;
@@ -203,7 +203,8 @@ const Watch = () => {
             <option value="EMB">Server : 1 (ads)</option>
             <option value="VID">Server : 2 (ads)</option>
             <option value="ANY">Server : 3 (Multi-Server)</option>
-            <option value="AGG">Server:  4(Hindi dubbed available)</option>
+            <option value="AGG">Server : 4(Hindi dubbed available)</option>
+            <option value="NEXT">Server: 5(Multi language available)</option>
             {/* <option value="PRO">Aggregator : 3 (Best-Server)</option> */}
             {/* <option value="MULTI">Aggregator : 5 (Fast-Server)</option> */}
             {/* <option value="SUP">Aggregator : 6 (Multi/Most-Server)</option> */}
@@ -301,9 +302,17 @@ const Watch = () => {
           referrerPolicy="origin"
         ></iframe>
       ) : null}
-  {/* ❌ COMMENTED IFRAME BLOCKS (kept in code, but disabled)
+      {source === "NEXT" && id && embedMode === true ? (
+        <iframe 
+          src={type === "movie" ? `${STREAM_URL_NEXR}/${type}/${id}` : `${STREAM_URL_NEXT}/${type}/${id}/${season}/${episode}`}
+          className={styles.iframe}
+          allow="accelerometer; autoplay; encrypted-media; gyroscope;"
+          referrerPolicy="origin"
+          ></iframe>
+      ) : null}
+  {/* ❌ COMMENTED IFRAME BLOCKS (kept in code, but disabled) */}
 
-      {source === "PRO" && id && embedMode === true ? (
+      {/*source === "PRO" && id && embedMode === true ? (
         <iframe src={`${STREAM_URL_PRO}/embed/${type}/${id}`} className={styles.iframe}></iframe>
       ) : null}
 
