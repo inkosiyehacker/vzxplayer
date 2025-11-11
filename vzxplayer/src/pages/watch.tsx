@@ -304,7 +304,7 @@ const Watch = () => {
       ) : null}
       {source === "NEXT" && id && embedMode === true ? (
         <iframe 
-          src={type === "movie" ? `${STREAM_URL_NEXT}/${type}/${id}` : `${STREAM_URL_NEXT}/${type}/${id}/${season}/${episode}`}
+          src={type === "movie" ? `${STREAM_URL_NEXT}/${type}/${id}?fullscreen=true&cast=true` : `${STREAM_URL_NEXT}/${type}/${id}/${season}/${episode}?fullscreen=true&cast=true`}
           className={styles.iframe}
           allow="accelerometer; autoplay; encrypted-media; gyroscope;"
           referrerPolicy="origin"
